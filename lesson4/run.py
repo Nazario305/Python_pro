@@ -258,5 +258,4 @@ def handle_user_input():
         else:
             print(f"Unrecognized command '{command}'")
 
-
 handle_user_input()
