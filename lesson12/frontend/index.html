@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор статей</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Генератор статей</h1>
+    <button onclick="generateIdea()">Сгенерировать случайную идею</button>
+    <button onclick="generateGuide()">Сгенерировать техническое руководство</button>
+    <button onclick="generateFiction()">Сгенерировать художественный рассказ</button>
+    <p id="output"></p>
+
+    <script>
+        async function fetchData(endpoint) {
+            const response = await fetch(endpoint);
+            const data = await response.json();
+            return data;
+        }
+
+        async function generateIdea() {
+            const result = await fetchData('/generate-random-idea');
+            document.getElementById('output').innerText = `Идея: ${result.idea}`;
+        }
+
+        async function generateGuide() {
+            const result = await fetchData('/generate-technical-guide');
+            document.getElementById('output').innerText = `Руководство: ${result.guide}`;
+        }
+
+        async function generateFiction() {
+            const result = await fetchData('/generate-fiction');
+            document.getElementById('output').innerText = `Рассказ: ${result.fiction}`;
+        }
+    </script>
+</body>
+</html>
